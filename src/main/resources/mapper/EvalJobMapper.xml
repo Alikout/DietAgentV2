@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diet.mapper.EvalJobMapper">
+
+    <resultMap id="EvalJobRowMap" type="com.diet.model.row.EvalJobRow">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="startAt" column="start_at"/>
+        <result property="endAt" column="end_at"/>
+        <result property="includeLlmJudge" column="include_llm_judge"/>
+        <result property="limitCount" column="limit_count"/>
+        <result property="status" column="status"/>
+        <result property="total" column="total"/>
+        <result property="processed" column="processed"/>
+        <result property="reportJson" column="report_json"/>
+        <result property="errorMessage" column="error_message"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.diet.model.row.EvalJobRow"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO diet_eval_job (
+        user_id, start_at, end_at, include_llm_judge, limit_count,
+        status, total, processed, created_at, updated_at
+        ) VALUES (
+        #{userId}, #{startAt}, #{endAt}, #{includeLlmJudge}, #{limitCount},
+        #{status}, #{total}, #{processed}, NOW(), NOW()
+        )
+    </insert>
+
+    <select id="findById" resultMap="EvalJobRowMap">
+        SELECT id, user_id, start_at, end_at, include_llm_judge, limit_count,
+        status, total, processed, report_json, error_message, created_at, updated_at
+        FROM diet_eval_job
+        WHERE id = #{id}
+        AND user_id = #{userId}
+    </select>
+
+    <!-- 最老的 PENDING 任务（多实例下各 worker 各取一条，认领靠 claim 的 CAS） -->
+    <select id="selectNextPending" resultMap="EvalJobRowMap">
+        SELECT id, user_id, start_at, end_at, include_llm_judge, limit_count,
+        status, total, processed, report_json, error_message, created_at, updated_at
+        FROM diet_eval_job
+        WHERE status = 'PENDING'
+        ORDER BY created_at ASC, id ASC
+        LIMIT 1
+    </select>
+
+    <!-- CAS 认领：status 条件保证同一条任务只被一个 worker 执行；
+         多实例升级时把 selectNextPending 换成 SELECT ... FOR UPDATE SKIP LOCKED 即可 -->
+    <update id="claim">
+        UPDATE diet_eval_job
+        SET status = 'RUNNING', updated_at = NOW()
+        WHERE id = #{id}
+        AND status = 'PENDING'
+    </update>
+
+    <update id="updateProgress">
+        UPDATE diet_eval_job
+        SET total = #{total}, processed = #{processed}, updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <update id="finish">
+        UPDATE diet_eval_job
+        SET status = 'DONE', report_json = #{reportJson}, processed = total, updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <update id="fail">
+        UPDATE diet_eval_job
+        SET status = 'FAILED', error_message = #{errorMessage}, updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 僵尸任务复位：进程被杀后 RUNNING 任务超时未更新，重置为 PENDING 断点续跑 -->
+    <update id="resetStaleRunning">
+        UPDATE diet_eval_job
+        SET status = 'PENDING', updated_at = NOW()
+        WHERE status = 'RUNNING'
+        AND updated_at &lt; NOW() - INTERVAL #{staleMinutes} MINUTE
+    </update>
+
+</mapper>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diet.mapper.SessionMapper">
+
+    <resultMap id="SessionRowMap" type="com.diet.model.row.SessionRow">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="phase" column="phase"/>
+        <result property="slots" column="slots"/>
+        <result property="lastRecommendations" column="last_recommendations"/>
+        <result property="version" column="version"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <resultMap id="SessionMessageRowMap" type="com.diet.model.row.SessionMessageRow">
+        <id property="id" column="id"/>
+        <result property="sessionId" column="session_id"/>
+        <result property="role" column="role"/>
+        <result property="content" column="content"/>
+        <result property="intent" column="intent"/>
+        <result property="agentTraceId" column="agent_trace_id"/>
+        <result property="createdAt" column="created_at"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.diet.model.row.SessionRow">
+        INSERT INTO diet_sessions (
+        id, user_id, phase, slots, last_recommendations, created_at, updated_at
+        ) VALUES (
+        #{id}, #{userId}, #{phase}, #{slots}, #{lastRecommendations}, NOW(), NOW()
+        )
+    </insert>
+
+    <select id="findById" resultMap="SessionRowMap">
+        SELECT id,
+        user_id,
+        phase,
+        slots,
+        last_recommendations,
+        version,
+        created_at,
+        updated_at
+        FROM diet_sessions
+        WHERE id = #{sessionId}
+        AND user_id = #{userId}
+    </select>
+
+    <!-- 乐观锁更新：version 作为 CAS 比对条件，比对失败（影响行数 0）由 SessionStateService 抛冲突异常 -->
+    <update id="update" parameterType="com.diet.model.row.SessionRow">
+        UPDATE diet_sessions
+        SET phase = #{phase},
+        slots = #{slots},
+        last_recommendations = #{lastRecommendations},
+        version = version + 1,
+        updated_at = NOW()
+        WHERE id = #{id}
+        AND user_id = #{userId}
+        AND version = #{version}
+    </update>
+
+    <insert id="insertMessage">
+        INSERT INTO diet_messages (session_id, role, content, intent, agent_trace_id, created_at)
+        VALUES (#{sessionId}, #{role}, #{content}, #{intent}, #{traceId}, NOW())
+    </insert>
+
+    <!-- 幂等插入：client_msg_id 有唯一键（uk_message_client），重复重试命中 ON DUPLICATE 后影响 0 行；
+         clientMsgId 为 null 时退化为普通 INSERT，不依赖 client_msg_id 列是否已建 -->
+    <insert id="insertMessageIdempotent">
+        INSERT INTO diet_messages (session_id, role, content, intent, agent_trace_id<if test="clientMsgId != null">, client_msg_id</if>, created_at)
+        VALUES (#{sessionId}, #{role}, #{content}, #{intent}, #{traceId}<if test="clientMsgId != null">, #{clientMsgId}</if>, NOW())
+        <if test="clientMsgId != null">
+            ON DUPLICATE KEY UPDATE id = id
+        </if>
+    </insert>
+
+    <!-- 会话历史查询：join diet_sessions 校验归属，时间正序返回，供前端刷新后恢复对话流 -->
+    <select id="findMessages" resultMap="SessionMessageRowMap">
+        SELECT m.id,
+        m.session_id,
+        m.role,
+        m.content,
+        m.intent,
+        m.agent_trace_id,
+        m.created_at
+        FROM diet_messages m
+        INNER JOIN diet_sessions s
+        ON s.id = m.session_id
+        AND s.user_id = #{userId}
+        WHERE m.session_id = #{sessionId}
+        ORDER BY m.created_at ASC,
+        m.id ASC
+        LIMIT #{limit}
+    </select>
+
+    <select id="listRecentMessages" resultMap="SessionMessageRowMap">
+        SELECT m.id,
+        m.session_id,
+        m.role,
+        m.content,
+        m.intent,
+        m.agent_trace_id,
+        m.created_at
+        FROM diet_messages m
+        INNER JOIN diet_sessions s
+        ON s.id = m.session_id
+        AND s.user_id = #{userId}
+        WHERE m.session_id = #{sessionId}
+        ORDER BY m.created_at DESC,
+        m.id DESC
+        LIMIT #{limit}
+    </select>
+
+</mapper>

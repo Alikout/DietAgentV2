@@ -1,0 +1,99 @@
+spring:
+  application:
+    name: harness-agent
+  # Java 21 虚拟线程：Tomcat 每请求一个虚拟线程，阻塞等待（LLM/JDBC）成本趋近于零。
+  # 前提：无长时间 synchronized（第一周已将会话锁换成 ReentrantLock）。
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/diet_db?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+    # 配置外置化（第四周）：生产环境必须用环境变量注入，仓库不保存真实密码；
+    # 本地开发保留默认值以便零配置启动，上生产前务必覆盖
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:123456}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      # 虚拟线程放开阻塞后，数据库连接成为新的稀缺资源：默认 10 扩到 30
+      maximum-pool-size: 30
+      # 拿不到连接 3s 快速失败，不允许请求在连接池上无限排队
+      connection-timeout: 3000
+  # Redis（第四周）：会话缓存 + 幂等键；全部调用带 try-catch 降级，Redis 不可用不阻断主链路
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 2000ms
+  # SSE 端点（第三周）的异步请求超时，与 emitter 超时对齐
+  mvc:
+    async:
+      request-timeout: 65000
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.diet.model
+  configuration:
+    map-underscore-to-camel-case: true
+server:
+  port: 8080
+# LLM 降级指标经 /actuator/metrics 暴露（diet.llm.* / diet.trace.* / diet.session.*）
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics
+# Resilience4j：保护 DashScope 配额与服务稳定性。
+# 拒绝（限流/隔离舱满/熔断打开）时立即失败走兜底模板——宁降级，不排队。
+resilience4j:
+  ratelimiter:
+    instances:
+      llm-main:
+        limit-for-period: 50        # 每 30s 最多 50 次 ≈ 100 QPM，按 DashScope 实际配额调整并留余量
+        limit-refresh-period: 30s
+        timeout-duration: 0
+      llm-light:
+        limit-for-period: 120
+        limit-refresh-period: 30s
+        timeout-duration: 0
+  bulkhead:
+    instances:
+      llm-main:
+        max-concurrent-calls: 10    # qwen-max 在途并发上限
+        max-wait-duration: 0
+      llm-light:
+        max-concurrent-calls: 30
+        max-wait-duration: 0
+  circuitbreaker:
+    instances:
+      llm:
+        sliding-window-size: 20
+        failure-rate-threshold: 50  # 失败率过半即熔断，避免雪崩时继续敲挂掉的 LLM
+        wait-duration-in-open-state: 30s
+        permitted-number-of-calls-in-half-open-state: 3
+agentscope:
+  dashscope:
+    api-key: ${DASHSCOPE_API_KEY:sk-ws-H.PLPXRER.cSLQ.MEUCIAnoj7P_yIueJ4nANcd4h9WpQUvICmfAAV1VtNUyeJ-uAiEAkdNJ6MAr5yLJN33pQvgp40J5C6JRiAg1MuYmTNSFwqQ}
+diet:
+  llm:
+    main-model: qwen-max
+    light-model: qwen-turbo
+    # LLM 调用超时：light 覆盖意图/澄清（常态 0.5~1.5s），main 覆盖推荐/规划（常态 2~5s）
+    main-call-timeout-seconds: 15
+    light-call-timeout-seconds: 6
+  jwt:
+    # HS256 签名密钥：生产环境必须通过 JWT_SECRET 环境变量注入（至少 32 字符），默认值仅供本地开发
+    secret: ${JWT_SECRET:dev-only-diet-agent-jwt-secret-key-change-in-production-0123456789}
+  session:
+    max-history-turns: 10
+  slot-cache:
+    ttl-minutes: 10   # 槽位字典 Caffeine 缓存时长，改库后最多延迟该时间生效
+  lock:
+    mode: local       # 会话锁实现：local=JVM 内 ReentrantLock；多实例部署时改 redis（Redisson）
+  trace:
+    retention-days: 90      # Trace 保留天数，定时任务每日清理（第四周数据治理）
+    purge-batch-size: 1000  # 单批删除行数，避免长事务锁表
+  eval:
+    job-poll-ms: 5000       # 评估任务 worker 轮询间隔
+    sync-limit-max: 50      # 同步评估的 limit 上限，超过走异步任务表
+logging:
+  level:
+    com.diet: INFO
