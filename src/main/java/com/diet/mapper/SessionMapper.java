@@ -1,7 +1,7 @@
 package com.diet.mapper;
 
-import com.diet.model.row.SessionMessageRow;
-import com.diet.model.row.SessionRow;
+import com.diet.common.model.row.SessionMessageRow;
+import com.diet.common.model.row.SessionRow;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.diet.conversation.clarify;
 
-import com.diet.model.domain.SlotBundle;
+import com.diet.common.model.domain.SlotBundle;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;

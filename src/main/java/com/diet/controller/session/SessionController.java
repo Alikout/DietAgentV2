@@ -1,7 +1,7 @@
 package com.diet.controller.session;
 
-import com.diet.model.web.CreateSessionResponse;
-import com.diet.model.row.SessionMessageRow;
+import com.diet.common.model.web.CreateSessionResponse;
+import com.diet.common.model.row.SessionMessageRow;
 import com.diet.security.CurrentUser;
 import com.diet.session.SessionService;
 import org.springframework.web.bind.annotation.GetMapping;

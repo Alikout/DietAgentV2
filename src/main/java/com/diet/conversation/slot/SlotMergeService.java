@@ -1,6 +1,6 @@
 package com.diet.conversation.slot;
 
-import com.diet.model.domain.SlotBundle;
+import com.diet.common.model.domain.SlotBundle;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

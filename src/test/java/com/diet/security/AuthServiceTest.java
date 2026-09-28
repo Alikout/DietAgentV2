@@ -2,8 +2,8 @@ package com.diet.security;
 
 import com.diet.exception.DietException;
 import com.diet.mapper.UserMapper;
-import com.diet.model.row.UserRow;
-import com.diet.model.web.AuthResponse;
+import com.diet.common.model.row.UserRow;
+import com.diet.common.model.web.AuthResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,7 +1,7 @@
 package com.diet.controller.auth;
 
-import com.diet.model.web.AuthRequest;
-import com.diet.model.web.AuthResponse;
+import com.diet.common.model.web.AuthRequest;
+import com.diet.common.model.web.AuthResponse;
 import com.diet.security.AuthService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

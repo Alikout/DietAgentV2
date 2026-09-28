@@ -1,10 +1,9 @@
 package com.diet.controller.chat;
 
-import com.diet.model.web.ChatRequest;
-import com.diet.model.web.ChatResponse;
+import com.diet.common.model.web.ChatRequest;
+import com.diet.common.model.web.ChatResponse;
 import com.diet.security.CurrentUser;
 import com.diet.conversation.orchestrator.DietOrchestratorService;
-import com.diet.trace.AgentTraceService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;

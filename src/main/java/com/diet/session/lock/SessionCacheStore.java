@@ -1,6 +1,6 @@
 package com.diet.session.lock;
 
-import com.diet.model.domain.SessionState;
+import com.diet.common.model.domain.SessionState;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

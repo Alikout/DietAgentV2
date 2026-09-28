@@ -1,7 +1,7 @@
 package com.diet.controller.trace;
 
-import com.diet.model.row.RequestTraceRow;
-import com.diet.model.web.TraceLabelRequest;
+import com.diet.common.model.row.RequestTraceRow;
+import com.diet.common.model.web.TraceLabelRequest;
 import com.diet.security.CurrentUser;
 import com.diet.trace.AgentTraceService;
 import org.springframework.web.bind.annotation.GetMapping;

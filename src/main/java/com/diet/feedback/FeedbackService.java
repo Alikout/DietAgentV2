@@ -2,7 +2,7 @@ package com.diet.feedback;
 
 import com.diet.exception.DietException;
 import com.diet.mapper.FeedbackMapper;
-import com.diet.model.web.FeedbackRequest;
+import com.diet.common.model.web.FeedbackRequest;
 import org.springframework.stereotype.Service;
 
 @Service

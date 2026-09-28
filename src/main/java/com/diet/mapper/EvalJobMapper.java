@@ -1,10 +1,8 @@
 package com.diet.mapper;
 
-import com.diet.model.row.EvalJobRow;
+import com.diet.common.model.row.EvalJobRow;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
-import java.time.LocalDateTime;
 
 @Mapper
 public interface EvalJobMapper {

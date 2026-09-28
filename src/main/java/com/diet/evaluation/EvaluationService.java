@@ -2,12 +2,12 @@ package com.diet.evaluation;
 
 import com.diet.exception.DietException;
 import com.diet.mapper.FeedbackMapper;
-import com.diet.model.evaluation.EvaluationReport;
-import com.diet.model.evaluation.EvaluationJudgeResult;
-import com.diet.model.web.EvaluationRequest;
-import com.diet.model.row.FeedbackRow;
-import com.diet.model.row.RequestTraceRow;
-import com.diet.model.evaluation.TraceEvaluationResult;
+import com.diet.common.model.evaluation.EvaluationReport;
+import com.diet.common.model.evaluation.EvaluationJudgeResult;
+import com.diet.common.model.web.EvaluationRequest;
+import com.diet.common.model.row.FeedbackRow;
+import com.diet.common.model.row.RequestTraceRow;
+import com.diet.common.model.evaluation.TraceEvaluationResult;
 import com.diet.trace.AgentTraceService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

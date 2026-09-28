@@ -1,9 +1,9 @@
 package com.diet.conversation.intent;
 
-import com.diet.enums.Intent;
-import com.diet.model.domain.IntentResult;
-import com.diet.model.domain.SessionState;
-import com.diet.model.domain.SlotBundle;
+import com.diet.common.enums.Intent;
+import com.diet.common.model.domain.IntentResult;
+import com.diet.common.model.domain.SessionState;
+import com.diet.common.model.domain.SlotBundle;
 import org.springframework.stereotype.Service;
 
 /**

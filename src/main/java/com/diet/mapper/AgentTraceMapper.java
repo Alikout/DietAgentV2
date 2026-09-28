@@ -1,6 +1,6 @@
 package com.diet.mapper;
 
-import com.diet.model.row.RequestTraceRow;
+import com.diet.common.model.row.RequestTraceRow;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

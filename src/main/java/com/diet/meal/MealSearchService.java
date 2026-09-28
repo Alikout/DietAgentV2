@@ -1,9 +1,9 @@
 package com.diet.meal;
 
 import com.diet.exception.DietException;
-import com.diet.model.domain.MealItem;
-import com.diet.model.domain.MealSearchRequest;
-import com.diet.enums.SourceMode;
+import com.diet.common.model.domain.MealItem;
+import com.diet.common.model.domain.MealSearchRequest;
+import com.diet.common.enums.SourceMode;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.diet.controller.chat;
 
-import com.diet.model.web.ChatRequest;
-import com.diet.model.web.ChatResponse;
+import com.diet.common.model.web.ChatRequest;
+import com.diet.common.model.web.ChatResponse;
 import com.diet.security.CurrentUser;
 import com.diet.conversation.orchestrator.DietOrchestratorService;
 import org.springframework.web.bind.annotation.PostMapping;

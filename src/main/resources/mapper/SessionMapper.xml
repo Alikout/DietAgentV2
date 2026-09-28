@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.diet.mapper.SessionMapper">
 
-    <resultMap id="SessionRowMap" type="com.diet.model.row.SessionRow">
+    <resultMap id="SessionRowMap" type="com.diet.common.model.row.SessionRow">
         <id property="id" column="id"/>
         <result property="userId" column="user_id"/>
         <result property="phase" column="phase"/>
@@ -15,7 +15,7 @@
         <result property="updatedAt" column="updated_at"/>
     </resultMap>
 
-    <resultMap id="SessionMessageRowMap" type="com.diet.model.row.SessionMessageRow">
+    <resultMap id="SessionMessageRowMap" type="com.diet.common.model.row.SessionMessageRow">
         <id property="id" column="id"/>
         <result property="sessionId" column="session_id"/>
         <result property="role" column="role"/>
@@ -25,7 +25,7 @@
         <result property="createdAt" column="created_at"/>
     </resultMap>
 
-    <insert id="insert" parameterType="com.diet.model.row.SessionRow">
+    <insert id="insert" parameterType="com.diet.common.model.row.SessionRow">
         INSERT INTO diet_sessions (
         id, user_id, phase, slots, last_recommendations, created_at, updated_at
         ) VALUES (
@@ -48,7 +48,7 @@
     </select>
 
     <!-- 乐观锁更新：version 作为 CAS 比对条件，比对失败（影响行数 0）由 SessionStateService 抛冲突异常 -->
-    <update id="update" parameterType="com.diet.model.row.SessionRow">
+    <update id="update" parameterType="com.diet.common.model.row.SessionRow">
         UPDATE diet_sessions
         SET phase = #{phase},
         slots = #{slots},

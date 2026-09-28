@@ -71,7 +71,7 @@ resilience4j:
         permitted-number-of-calls-in-half-open-state: 3
 agentscope:
   dashscope:
-    api-key: ${DASHSCOPE_API_KEY:sk-ws-H.PLPXRER.cSLQ.MEUCIAnoj7P_yIueJ4nANcd4h9WpQUvICmfAAV1VtNUyeJ-uAiEAkdNJ6MAr5yLJN33pQvgp40J5C6JRiAg1MuYmTNSFwqQ}
+    api-key: ${DASHSCOPE_API_KEY:sk-ws-H.PLPXRER.cSLQ.MEUCIAnoj7P_yIueJ4nANcd4h9WpQUvICmfAAV1VtNUyeJ-uAiEAkdNJ6MAr5yLJN33pQvgp40J5C6JRiAg1MuYmTNS}
 diet:
   llm:
     main-model: qwen-max

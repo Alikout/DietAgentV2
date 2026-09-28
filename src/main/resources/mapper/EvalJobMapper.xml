@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.diet.mapper.EvalJobMapper">
 
-    <resultMap id="EvalJobRowMap" type="com.diet.model.row.EvalJobRow">
+    <resultMap id="EvalJobRowMap" type="com.diet.common.model.row.EvalJobRow">
         <id property="id" column="id"/>
         <result property="userId" column="user_id"/>
         <result property="startAt" column="start_at"/>
@@ -20,7 +20,7 @@
         <result property="updatedAt" column="updated_at"/>
     </resultMap>
 
-    <insert id="insert" parameterType="com.diet.model.row.EvalJobRow"
+    <insert id="insert" parameterType="com.diet.common.model.row.EvalJobRow"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO diet_eval_job (
         user_id, start_at, end_at, include_llm_judge, limit_count,

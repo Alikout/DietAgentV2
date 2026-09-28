@@ -1,7 +1,7 @@
 package com.diet.evaluation;
 
 import com.diet.llm.builder.EvaluationJudgeAgentBuilder;
-import com.diet.model.evaluation.EvaluationJudgeResult;
+import com.diet.common.model.evaluation.EvaluationJudgeResult;
 import com.diet.trace.AgentTraceService;
 import com.diet.llm.LlmJsonService;
 import com.fasterxml.jackson.databind.JsonNode;

@@ -2,8 +2,8 @@ package com.diet.trace;
 
 import com.diet.exception.DietException;
 import com.diet.mapper.AgentTraceMapper;
-import com.diet.model.row.RequestTraceRow;
-import com.diet.model.web.TraceLabelRequest;
+import com.diet.common.model.row.RequestTraceRow;
+import com.diet.common.model.web.TraceLabelRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.agentscope.core.ReActAgent;
 import io.agentscope.core.message.Msg;

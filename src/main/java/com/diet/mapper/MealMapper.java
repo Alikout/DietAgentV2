@@ -1,7 +1,7 @@
 package com.diet.mapper;
 
-import com.diet.model.row.MealItemRow;
-import com.diet.enums.SourceMode;
+import com.diet.common.model.row.MealItemRow;
+import com.diet.common.enums.SourceMode;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

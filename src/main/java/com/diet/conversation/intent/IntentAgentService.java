@@ -1,10 +1,10 @@
 package com.diet.conversation.intent;
 
 import com.diet.llm.factory.AgentFactory;
-import com.diet.model.domain.ConversationTurn;
-import com.diet.enums.Intent;
-import com.diet.model.domain.IntentResult;
-import com.diet.model.domain.SlotBundle;
+import com.diet.common.model.domain.ConversationTurn;
+import com.diet.common.enums.Intent;
+import com.diet.common.model.domain.IntentResult;
+import com.diet.common.model.domain.SlotBundle;
 import com.diet.slotdict.SlotOptionService;
 import com.diet.trace.AgentTraceService;
 import com.diet.llm.LlmJsonService;

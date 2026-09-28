@@ -2,7 +2,7 @@ package com.diet.slotdict;
 
 import com.diet.exception.DietException;
 import com.diet.mapper.SlotOptionMapper;
-import com.diet.model.domain.SlotBundle;
+import com.diet.common.model.domain.SlotBundle;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 import org.springframework.beans.factory.annotation.Value;

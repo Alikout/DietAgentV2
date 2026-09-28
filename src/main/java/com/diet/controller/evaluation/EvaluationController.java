@@ -1,7 +1,6 @@
 package com.diet.controller.evaluation;
 
-import com.diet.model.evaluation.EvaluationReport;
-import com.diet.model.web.EvaluationRequest;
+import com.diet.common.model.web.EvaluationRequest;
 import com.diet.security.CurrentUser;
 import com.diet.evaluation.EvalJobService;
 import com.diet.evaluation.EvaluationService;

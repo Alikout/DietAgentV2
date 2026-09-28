@@ -1,10 +1,10 @@
 package com.diet.session;
 
-import com.diet.enums.Intent;
+import com.diet.common.enums.Intent;
 import com.diet.mapper.SessionMapper;
-import com.diet.model.domain.ConversationTurn;
-import com.diet.model.row.SessionMessageRow;
-import com.diet.model.row.SessionRow;
+import com.diet.common.model.domain.ConversationTurn;
+import com.diet.common.model.row.SessionMessageRow;
+import com.diet.common.model.row.SessionRow;
 import com.diet.common.util.JsonService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

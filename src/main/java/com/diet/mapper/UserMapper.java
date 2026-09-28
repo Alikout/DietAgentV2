@@ -1,6 +1,6 @@
 package com.diet.mapper;
 
-import com.diet.model.row.UserRow;
+import com.diet.common.model.row.UserRow;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

@@ -2,8 +2,8 @@ package com.diet.evaluation;
 
 import com.diet.exception.DietException;
 import com.diet.mapper.EvalJobMapper;
-import com.diet.model.row.EvalJobRow;
-import com.diet.model.web.EvaluationRequest;
+import com.diet.common.model.row.EvalJobRow;
+import com.diet.common.model.web.EvaluationRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 

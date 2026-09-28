@@ -1,13 +1,13 @@
 package com.diet.conversation.recommend;
 
 import com.diet.llm.factory.AgentFactory;
-import com.diet.enums.SourceMode;
-import com.diet.model.domain.MealItem;
-import com.diet.model.web.MealResponse;
-import com.diet.model.domain.RecommendResult;
-import com.diet.model.domain.RecommendedMealOption;
-import com.diet.model.domain.ResponseResult;
-import com.diet.model.domain.SlotBundle;
+import com.diet.common.enums.SourceMode;
+import com.diet.common.model.domain.MealItem;
+import com.diet.common.model.web.MealResponse;
+import com.diet.common.model.domain.RecommendResult;
+import com.diet.common.model.domain.RecommendedMealOption;
+import com.diet.common.model.domain.ResponseResult;
+import com.diet.common.model.domain.SlotBundle;
 import com.diet.trace.AgentTraceService;
 import com.diet.llm.LlmJsonService;
 import com.fasterxml.jackson.databind.JsonNode;

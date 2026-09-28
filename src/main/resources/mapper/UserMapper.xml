@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.diet.mapper.UserMapper">
 
-    <resultMap id="UserRowMap" type="com.diet.model.row.UserRow">
+    <resultMap id="UserRowMap" type="com.diet.common.model.row.UserRow">
         <id property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="passwordHash" column="password_hash"/>
@@ -12,7 +12,7 @@
         <result property="createdAt" column="created_at"/>
     </resultMap>
 
-    <insert id="insert" parameterType="com.diet.model.row.UserRow"
+    <insert id="insert" parameterType="com.diet.common.model.row.UserRow"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO diet_user (username, password_hash, role, created_at)
         VALUES (#{username}, #{passwordHash}, #{role}, NOW())

@@ -1,11 +1,11 @@
 package com.diet.session;
 
-import com.diet.enums.SessionPhase;
-import com.diet.enums.SourceMode;
+import com.diet.common.enums.SessionPhase;
+import com.diet.common.enums.SourceMode;
 import com.diet.exception.SessionConflictException;
 import com.diet.mapper.SessionMapper;
-import com.diet.model.domain.SessionState;
-import com.diet.model.domain.SlotBundle;
+import com.diet.common.model.domain.SessionState;
+import com.diet.common.model.domain.SlotBundle;
 import com.diet.session.lock.SessionCacheStore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;

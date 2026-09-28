@@ -2,18 +2,17 @@ package com.diet.meal;
 
 import com.diet.exception.DietException;
 import com.diet.mapper.MealMapper;
-import com.diet.model.domain.MealItem;
-import com.diet.model.row.MealItemRow;
-import com.diet.model.web.MealRequest;
-import com.diet.model.domain.SlotBundle;
-import com.diet.enums.SourceMode;
+import com.diet.common.model.domain.MealItem;
+import com.diet.common.model.row.MealItemRow;
+import com.diet.common.model.web.MealRequest;
+import com.diet.common.model.domain.SlotBundle;
+import com.diet.common.enums.SourceMode;
 import com.diet.slotdict.SlotOptionService;
 import com.diet.common.util.JsonService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.Comparator;
+
 import java.util.List;
-import java.util.Set;
 
 /**
  * 餐食数据服务。

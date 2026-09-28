@@ -1,8 +1,8 @@
 package com.diet.conversation.clarify;
 
 import com.diet.llm.factory.AgentFactory;
-import com.diet.model.domain.ClarifyResult;
-import com.diet.model.domain.SlotBundle;
+import com.diet.common.model.domain.ClarifyResult;
+import com.diet.common.model.domain.SlotBundle;
 import com.diet.trace.AgentTraceService;
 import io.agentscope.core.ReActAgent;
 import io.agentscope.core.message.Msg;

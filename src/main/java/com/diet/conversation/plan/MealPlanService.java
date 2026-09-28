@@ -1,10 +1,10 @@
 package com.diet.conversation.plan;
 
-import com.diet.enums.SourceMode;
-import com.diet.model.domain.MealItem;
-import com.diet.model.domain.MealRankRequest;
-import com.diet.model.domain.MealSearchRequest;
-import com.diet.model.domain.SlotBundle;
+import com.diet.common.enums.SourceMode;
+import com.diet.common.model.domain.MealItem;
+import com.diet.common.model.domain.MealRankRequest;
+import com.diet.common.model.domain.MealSearchRequest;
+import com.diet.common.model.domain.SlotBundle;
 import com.diet.meal.MealRankService;
 import com.diet.meal.MealSearchService;
 import org.springframework.stereotype.Service;

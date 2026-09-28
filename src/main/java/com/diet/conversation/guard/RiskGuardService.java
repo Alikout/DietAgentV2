@@ -1,9 +1,9 @@
 package com.diet.conversation.guard;
 
-import com.diet.model.domain.RiskGuardResult;
-import com.diet.enums.Intent;
-import com.diet.model.domain.RecommendResult;
-import com.diet.model.domain.ResponseResult;
+import com.diet.common.model.domain.RiskGuardResult;
+import com.diet.common.enums.Intent;
+import com.diet.common.model.domain.RecommendResult;
+import com.diet.common.model.domain.ResponseResult;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;

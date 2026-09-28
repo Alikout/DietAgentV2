@@ -1,8 +1,8 @@
 package com.diet.meal;
 
-import com.diet.model.domain.MealItem;
-import com.diet.model.domain.MealRankRequest;
-import com.diet.model.domain.SlotBundle;
+import com.diet.common.model.domain.MealItem;
+import com.diet.common.model.domain.MealRankRequest;
+import com.diet.common.model.domain.SlotBundle;
 import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.HashSet;

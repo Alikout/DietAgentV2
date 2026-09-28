@@ -1,6 +1,6 @@
 package com.diet.mapper;
 
-import com.diet.model.row.FeedbackRow;
+import com.diet.common.model.row.FeedbackRow;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
