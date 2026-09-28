@@ -3,7 +3,7 @@ package com.diet.controller.trace;
 import com.diet.model.row.RequestTraceRow;
 import com.diet.model.web.TraceLabelRequest;
 import com.diet.security.CurrentUser;
-import com.diet.service.trace.AgentTraceService;
+import com.diet.trace.AgentTraceService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.PathVariable;

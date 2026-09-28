@@ -3,7 +3,7 @@ package com.diet.controller.chat;
 import com.diet.model.web.ChatRequest;
 import com.diet.model.web.ChatResponse;
 import com.diet.security.CurrentUser;
-import com.diet.service.orchestrator.DietOrchestratorService;
+import com.diet.conversation.orchestrator.DietOrchestratorService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

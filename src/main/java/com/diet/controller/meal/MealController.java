@@ -3,7 +3,7 @@ package com.diet.controller.meal;
 import com.diet.model.web.MealRequest;
 import com.diet.model.web.MealResponse;
 import com.diet.security.CurrentUser;
-import com.diet.service.meal.MealService;
+import com.diet.meal.MealService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

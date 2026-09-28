@@ -3,7 +3,7 @@ package com.diet.controller.session;
 import com.diet.model.web.CreateSessionResponse;
 import com.diet.model.row.SessionMessageRow;
 import com.diet.security.CurrentUser;
-import com.diet.service.session.SessionService;
+import com.diet.session.SessionService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

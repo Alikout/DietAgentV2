@@ -2,7 +2,7 @@ package com.diet.controller.feedback;
 
 import com.diet.model.web.FeedbackRequest;
 import com.diet.security.CurrentUser;
-import com.diet.service.feedback.FeedbackService;
+import com.diet.feedback.FeedbackService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
