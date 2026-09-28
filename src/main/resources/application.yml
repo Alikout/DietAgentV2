@@ -1,6 +1,6 @@
 spring:
   application:
-    name: harness-agent
+    name: diet-agent
   # Java 21 虚拟线程：Tomcat 每请求一个虚拟线程，阻塞等待（LLM/JDBC）成本趋近于零。
   # 前提：无长时间 synchronized（第一周已将会话锁换成 ReentrantLock）。
   threads:
